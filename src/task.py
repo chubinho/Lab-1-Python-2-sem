@@ -1,6 +1,7 @@
 from dataclasses import dataclass
+from typing import Any
 
 @dataclass
 class Task:
-    id: int
-    payload: dict
+    id: str
+    payload: Any
