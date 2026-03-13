@@ -31,5 +31,3 @@ def set_logger(level: int = logging.INFO, log_file: str = "task.log") -> logging
 
     
     return logger
-
-logger = set_logger()

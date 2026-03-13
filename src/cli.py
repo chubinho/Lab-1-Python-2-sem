@@ -1,10 +1,18 @@
 from pathlib import Path
 import typer
+import logging
 
 from src.sources.file_source import FileSource
 from src.sources.generator_source import GeneratorConfig, GeneratorSource
 from src.sources.api_mock_source import APIMockSource
 from src.consumer import TaskConsumer
+from src.logger import set_logger
+
+
+logger = logging.getLogger(__name__)
+set_logger(logging.INFO)
+
+
 app = typer.Typer(help="Платформа обработки задач")
 
 
@@ -13,16 +21,28 @@ def file(path: Path = typer.Argument(..., help="Путь к JSON-файлу")):
     """
     Получение задачи из файла
     """
+    logger.info(f"Запуск команды 'file': path={path}")
     consumer = TaskConsumer()
     try:
+        logger.debug("Создание FileSource для {path}")
         source = FileSource(path)
         tasks = consumer.accept_tasks(source)
+        logger.info(f"FileSource: получено {len(tasks)} задач")
         typer.echo(f"FileSource: {len(tasks)} задач")
         for task in tasks:
             typer.echo(f" - {task.id}: {task.payload}")
 
+    except FileNotFoundError as e:
+        logger.error(f"Файл с путем - {path} не найден - {e}")
+        typer.echo(f"Ошибка: Файл {e} не найден")
+        raise typer.Exit(1)
+    except TypeError as e:
+        logger.error(f"Нарушение контракта - {e}")
+        typer.echo(f"Нарушение контракта - {e}")
+        raise typer.Exit(1)
     except Exception as e:
-        typer.echo(f"Ошибка:{e}")
+        logger.error(f"Ошибка: {e}")
+        typer.echo(f"Ошибка: {e}")
         raise typer.Exit(1)
 
 

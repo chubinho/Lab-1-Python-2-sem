@@ -32,7 +32,7 @@ class FileSource:
         try:
             if not self.path.exists():
                 raise FileNotFoundError(
-                    f"The task file was not found:{self.path}")
+                    f"Файл с заданием не найден:{self.path}")
 
             with open(self.path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
@@ -47,8 +47,8 @@ class FileSource:
             return tasks
         except json.JSONDecodeError as e:
             raise ValueError(
-                f"Invalid JSON format in the file {self.path}: {e}")
+                f"Неверная запись JSON в файле {self.path}: {e}")
         except KeyError as e:
-            raise KeyError((f"The required field is missing in the task {e}"))
+            raise KeyError((f"Обязательное поле пропущено: {e}"))
         except Exception as e:
-            raise ValueError(f"Error creating task from data: {self.path}")
+            raise ValueError(f"Ошибка: {self.path}")

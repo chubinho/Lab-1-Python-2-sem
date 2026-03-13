@@ -1,0 +1,34 @@
+[
+    {
+        "id": "task_1",
+        "payload": {
+            "title": "Hello World",
+            "author": "Alice",
+            "message": "My first message"
+        }
+    },
+    {
+        "id": "task_2",
+        "payload": {
+            "title": "Duck Typing",
+            "author": "Bob",
+            "message": "If it quacks like a duck"
+        }
+    },
+    {
+        "id": "task_3",
+        "payload": {
+            "title": "Protocols",
+            "author": "Carol",
+            "message": "Python Protocols are powerful"
+        }
+    },
+    {
+        "id": "task_4",
+        "payload": {
+            "title": "CLI Tools",
+            "author": "Dave",
+            "message": "Typer makes CLI apps easy"
+        }
+    }
+]
