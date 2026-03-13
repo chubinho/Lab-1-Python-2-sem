@@ -18,3 +18,10 @@ class TestProtocol:
         source = GeneratorSource()
         tasks = source.get_task()
         assert isinstance(tasks, list)
+
+    def test_runtime_checkable_attribute_exists(self):
+        """
+        Проверка, что у протокола есть атрибут _is_runtime_protocol.
+        """
+        assert hasattr(TaskSource, '_is_runtime_protocol')
+        assert TaskSource._is_runtime_protocol is True

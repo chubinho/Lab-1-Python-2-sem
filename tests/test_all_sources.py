@@ -87,6 +87,20 @@ class TestGeneratorSource:
 
         assert len(tasks) == 0
 
+    def test_for_test_factory_method(self):
+        """
+        Проверка метода for_test().
+
+        """
+        source1 = GeneratorSource.for_test(count=3)
+        source2 = GeneratorSource.for_test(count=3)
+
+        tasks1 = source1.get_task()
+        tasks2 = source2.get_task()
+
+        assert len(tasks1) == 3
+        assert [t.id for t in tasks1] == [t.id for t in tasks2]
+
 
 class TestAPIMockSource:
     def test_default_tasks_count(self):
