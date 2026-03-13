@@ -43,3 +43,25 @@ Lab-1-Python-2-sem/
 ├── .pre-commit-config.yaml  # Конфиг .pre-commit
 ├── pyproject.toml # Конфиг проекта
 └── README.md # Документация
+```
+## Установка зависимостей 
+```
+pip install -r requirements.txt
+```
+
+## CLI
+
+### Вывод всей нужной информации по взаимодейстию с пользователем:
+```
+python -m src --help # 
+```
+
+## Тестирование
+```
+# Запустить все тесты
+pytest tests/ -v
+
+# С отчётом о покрытии
+pytest tests/ -v --cov=src
+```
+
